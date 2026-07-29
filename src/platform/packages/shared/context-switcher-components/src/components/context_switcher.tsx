@@ -99,6 +99,7 @@ export const ContextSwitcher = ({
   environmentContext,
   footerLinks,
   onOpen,
+  iconOnly = false,
 }: ContextSwitcherProps) => {
   const { euiTheme } = useEuiTheme();
 
@@ -246,11 +247,12 @@ export const ContextSwitcher = ({
           label={triggerLabel}
           onClick={togglePopover}
           isSelected={isOpen}
+          iconOnly={iconOnly}
         />
       }
       isOpen={isOpen}
       closePopover={closePopover}
-      anchorPosition="downLeft"
+      anchorPosition={iconOnly ? 'rightUp' : 'downLeft'}
       panelStyle={{ width: POPOVER_WIDTH_PX }}
       panelPaddingSize="s"
       ownFocus

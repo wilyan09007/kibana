@@ -13,6 +13,7 @@ import {
   EuiIcon,
   EuiLoadingSpinner,
   EuiPopover,
+  type PopoverAnchorPosition,
 } from '@elastic/eui';
 import type { FunctionComponent, MouseEvent, ReactNode } from 'react';
 import React, { Fragment, useCallback, useState } from 'react';
@@ -76,6 +77,7 @@ interface SecurityNavControlProps {
   logoutUrl: string;
   renderButton?: (props: SecurityNavControlRenderButtonProps) => NonNullable<ReactNode>;
   userMenuLinks$: Observable<UserMenuLink[]>;
+  anchorPosition?: PopoverAnchorPosition;
 }
 
 export const SecurityNavControl: FunctionComponent<SecurityNavControlProps> = ({
@@ -84,6 +86,7 @@ export const SecurityNavControl: FunctionComponent<SecurityNavControlProps> = ({
   userMenuLinks$,
   renderButton,
   avatarSize = 's',
+  anchorPosition = 'downRight',
 }) => {
   const userMenuLinks = useObservable(userMenuLinks$, []);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -188,7 +191,7 @@ export const SecurityNavControl: FunctionComponent<SecurityNavControlProps> = ({
       ownFocus
       button={button}
       isOpen={isPopoverOpen}
-      anchorPosition="downRight"
+      anchorPosition={anchorPosition}
       repositionOnScroll
       closePopover={() => setIsPopoverOpen(false)}
       panelPaddingSize="none"
